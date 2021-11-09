@@ -1,58 +1,49 @@
 apply plugin: "maven-publish"
-apply plugin: "signing"
+//apply plugin: "signing"
 
 task sourceJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier "sources"
 }
 
+def githubPropertiesFile = rootProject.file("github.properties")
+
+// Initializes a new Properties() object called keystoreProperties.
+def githubProperties = new Properties()
+
+// Loads the keystore.properties file into the keystoreProperties object.
+githubProperties.load(new FileInputStream(githubPropertiesFile))
+
 afterEvaluate {
     publishing {
-        repositories {
-            maven {
-                url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
-                credentials {
-                    username findProperty("OSSRH_ID") ?: ""
-                    password findProperty("OSSRH_PASSWORD") ?: ""
-                }
-            }
-        }
+
         publications {
             release(MavenPublication) {
                 from components.release
 
-                groupId = 'com.github.skgmn'
+                groupId = 'com.github.emkaydauda'
                 artifactId = 'composetooltip'
-                version = "0.2.0"
+                version = "0.2.1"
 
                 artifact(sourceJar)
 
-                pom {
-                    name = "ComposeTooltip"
-                    description = "Tooltip library for Jetpack Compose"
-                    url = "https://github.com/skgmn/ComposeTooltip"
-                    licenses {
-                        license {
-                            name = "MIT License"
-                            url = "http://opensource.org/licenses/MIT"
-                        }
-                    }
-                    developers {
-                        developer {
-                            id = "skgmn"
-                            name = "skgmn"
-                        }
-                    }
-                    scm {
-                        connection = "scm:git@github.com:skgmn/ComposeTooltip.git"
-                        developerConnection = "scm:git@github.com:skgmn/ComposeTooltip.git"
-                        url = "https://github.com/skgmn/ComposeTooltip"
-                    }
+
+            }
+        }
+
+        repositories {
+            maven {
+                name = "GitHub Packages"
+                url = uri("https://maven.pkg.github.com/emkaydauda/ComposeTooltip")
+
+                credentials {
+                    username = githubProperties['user']
+                    password = githubProperties['key']
                 }
             }
         }
     }
-    signing {
-        sign publishing.publications.release
-    }
+//    signing {
+//        sign publishing.publications.release
+//    }
 }
