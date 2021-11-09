@@ -6,13 +6,13 @@ task sourceJar(type: Jar) {
     classifier "sources"
 }
 
-def githubPropertiesFile = rootProject.file("github.properties")
-
-// Initializes a new Properties() object called keystoreProperties.
-def githubProperties = new Properties()
-
-// Loads the keystore.properties file into the keystoreProperties object.
-githubProperties.load(new FileInputStream(githubPropertiesFile))
+//def githubPropertiesFile = rootProject.file("github.properties")
+//
+//// Initializes a new Properties() object called keystoreProperties.
+//def githubProperties = new Properties()
+//
+//// Loads the keystore.properties file into the keystoreProperties object.
+//githubProperties.load(new FileInputStream(githubPropertiesFile))
 
 afterEvaluate {
     publishing {
@@ -23,7 +23,7 @@ afterEvaluate {
 
                 groupId = 'com.github.emkaydauda'
                 artifactId = 'composetooltip'
-                version = "0.2.1"
+                version = "0.2.2"
 
                 artifact(sourceJar)
 
@@ -31,17 +31,17 @@ afterEvaluate {
             }
         }
 
-        repositories {
-            maven {
-                name = "GitHub Packages"
-                url = uri("https://maven.pkg.github.com/emkaydauda/ComposeTooltip")
-
-                credentials {
-                    username = githubProperties['user']
-                    password = githubProperties['key']
-                }
-            }
-        }
+//        repositories {
+//            maven {
+//                name = "GitHub Packages"
+//                url = uri("https://maven.pkg.github.com/emkaydauda/ComposeTooltip")
+//
+//                credentials {
+//                    username = githubProperties['user']
+//                    password = githubProperties['key']
+//                }
+//            }
+//        }
     }
 //    signing {
 //        sign publishing.publications.release
