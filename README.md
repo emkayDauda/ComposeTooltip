@@ -98,7 +98,7 @@ Box {
 }
 ```
 
-When `Tooltip` is being displayed as a popup, an anchor and `Tooltip` should be put altogether inside one composable.
+When `Tooltip` is being displayed as a popup, an anchor and `Tooltip` should be put altogether inside one composable..
 
 ## Method signatures
 
