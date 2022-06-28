@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 /**
  * Style of tooltip
  */
-class TooltipStyle internal constructor(
+class TooltipStyle constructor(
     color: Color,
     cornerRadius: Dp,
     tipWidth: Dp,

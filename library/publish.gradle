@@ -23,7 +23,7 @@ afterEvaluate {
 
                 groupId = 'com.github.emkaydauda'
                 artifactId = 'composetooltip'
-                version = "0.2.2"
+                version = "0.2.3"
 
                 artifact(sourceJar)
 
